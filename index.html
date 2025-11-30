@@ -873,6 +873,108 @@
 
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
 
+        /* LETTER SECTION - ESKİTİLMİŞ MEKTUP */
+        .letter-wrapper {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .letter-paper {
+            position: relative;
+            padding: 35px 26px 32px;
+            background: radial-gradient(circle at top left, #fdf3df 0%, #f7e8c8 40%, #f2dfb8 100%);
+            border-radius: 4px;
+            box-shadow:
+                0 18px 40px rgba(0, 0, 0, 0.55),
+                0 0 0 1px rgba(0, 0, 0, 0.18);
+            color: #3b2a1a;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.9;
+            transform: rotate(-0.4deg);
+            overflow: hidden;
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(255,255,255,0.25), transparent 40%, transparent 60%, rgba(165,116,58,0.12)),
+                radial-gradient(circle at 10% 0%, rgba(0,0,0,0.14), transparent 55%),
+                radial-gradient(circle at 90% 100%, rgba(0,0,0,0.16), transparent 60%);
+            mix-blend-mode: multiply;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .letter-paper::after {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(120, 82, 40, 0.4);
+            border-radius: 2px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .letter-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5b3b24;
+        }
+
+        .letter-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #7d5a3a;
+            margin-bottom: 22px;
+        }
+
+        .letter-text p {
+            margin-bottom: 12px;
+            font-size: 1.02rem;
+        }
+
+        .letter-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-sign {
+            margin-top: 26px;
+            font-style: italic;
+            font-size: 1.05rem;
+            text-align: right;
+        }
+
+        .letter-smudge {
+            position: absolute;
+            bottom: -10px;
+            left: 15%;
+            width: 160px;
+            height: 40px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%);
+            opacity: 0.35;
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        .letter-paper:hover {
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow:
+                0 22px 48px rgba(0, 0, 0, 0.65),
+                0 0 0 1px rgba(0, 0, 0, 0.22);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
         @media (min-width: 769px) {
             .nav-container { padding: 25px 40px; justify-content: flex-start; }
             .mobile-nav { display: none; }
@@ -932,6 +1034,7 @@
             <div class="nav-dot" data-section="codes"></div>
             <div class="nav-dot" data-section="models"></div>
             <div class="nav-dot" data-section="repair"></div>
+            <div class="nav-dot" data-section="letter"></div>
             <div class="nav-dot" data-section="sensory"></div>
         </div>
 
@@ -945,7 +1048,10 @@
                 <p class="hero-desc">
                     Telefon kayıtlarında ilk araman 01:44'te.  
                     Çalar çalmaz açmışım.  
-                    Bu sayfa, o geceyi ve sana olan saygımı, sevgimi ve niyetimi açık açık anlatmak için.
+                    Sen o anı hatırlamıyorsun, biliyorum.  
+                    Mesajlarda “bir daha aramam” diye bir cümle hiç geçmedi;  
+                    o sadece kalbimde hissettiğim korkuydu.  
+                    Bu sayfa, o geceyi ve sana olan niyetimi dürüstçe anlatmak için.
                 </p>
             </div>
             <div class="scroll-indicator">
@@ -975,33 +1081,33 @@
                         <span class="log-time">[01:44]</span> <span class="log-event">CALL_INCOMING</span><br>
                         <span class="log-impact">from:</span> Eylülüm<br>
                         <span class="log-impact">status:</span> <span class="log-status ok">answered_instantly</span><br>
-                        <span class="log-note">"Telefon ilk çaldığında açtım. Sesini duydum, sen de benim sesimi duydun."</span>
+                        <span class="log-note">"Telefon ilk çaldığında açtım. Sen beni, ben de seni duydum."</span>
                     </div>
                     <div class="log-entry">
                         <span class="log-time">[01:44]</span> <span class="log-event">MEMORY_GAP</span><br>
                         <span class="log-impact">reason:</span> deep_sleep_mode<br>
-                        <span class="log-note">"İkimiz de yarı uykuluyduk. Konuşma kayıtta, ama hafıza bulanık. Bu ilgisizlik değil; sadece gece ve yorgunluk."</span>
+                        <span class="log-note">"İkimiz de yarı uykuluyduk. Sen, o aramayı ve konuşmayı hatırlamıyorsun. Bu, ilgisizlik değil; sadece gece, fırtına ve uykunun ağırlığı."</span>
                     </div>
                     <div class="log-entry">
                         <span class="log-time">[05:00]</span> <span class="log-event">WAKE_UP</span><br>
                         <span class="log-impact">action:</span> checked_phone<br>
-                        <span class="log-note">"Uyandığımda aramayı gördüm. Detayları tam hatırlayamasam da, içinde sen olduğunu biliyordum."</span>
+                        <span class="log-note">"Uyandığımda aramayı gördüm. İçimde tek bir düşünce vardı: Keşke daha uyanık olsaydım ve sen o an kendini daha güvende hissetseydin."</span>
                     </div>
                     <div class="log-entry">
                         <span class="log-time">[05:44]</span> <span class="log-event">CALL_INCOMING</span><br>
                         <span class="log-impact">from:</span> Eylülüm<br>
                         <span class="log-impact">status:</span> <span class="log-status">missed</span><br>
-                        <span class="log-note">"Tekrar aradın. Ben geri dalmışım. Seni bekletmek istemezdim, bu kısmı düzeltemem ama telafi etmek istiyorum."</span>
+                        <span class="log-note">"Tekrar aradın. Ben geri dalmışım. Seni bekletmek istemezdim, bu kısım için özellikle üzgünüm."</span>
                     </div>
                     <div class="log-entry">
-                        <span class="log-time">[SONRA]</span> <span class="log-event">RESPONSE</span><br>
-                        <span class="log-impact">message:</span> <span class="log-status">"gereğin yok, bir daha aramam"</span><br>
-                        <span class="log-note">"Bu cümleyi yazarken kalbim kırılmıştı. Öfke ve kırgınlıkla yazılmış bir cümleydi. Gerçekte istediğim: ihtiyaç duyduğunda yine beni araman."</span>
+                        <span class="log-time">[SONRA]</span> <span class="log-event">TEXT_EXCHANGE</span><br>
+                        <span class="log-impact">message_from_her:</span> <span class="log-status">"önemli değil, abimi aradım"</span><br>
+                        <span class="log-note">"Bu cümledeki kırgınlığı hissettim. Asıl canımı acıtan, sana o gece tam olarak güven verecek halde olamamam oldu."</span>
                     </div>
                     <div class="log-entry">
-                        <span class="log-time">[SONRA]</span> <span class="log-event">TRUST_STATE</span><br>
-                        <span class="log-impact">status:</span> <span class="log-status">fragile</span><br>
-                        <span class="log-note">"Sen 'önemli değil, abimi aradım' dedin. O an güveninin ne kadar incindiğini hissettim. Bu site, o güveni geri kazanmak için yazıldı."</span>
+                        <span class="log-time">[SONRA]</span> <span class="log-event">HEART_REACTION</span><br>
+                        <span class="log-impact">internal_feeling:</span> <span class="log-status">"sanki bir gün beni aramayı bırakabilirmişsin gibi"</span><br>
+                        <span class="log-note">"Sen 'bir daha aramam' demedin. O cümle hiç geçmedi. Ama ben, sevdiğim kadının sesinden o kırgınlığı hissedince içimden böyle bir korku geçti. Bu sayfa, o korkuyu değil; sana olan sevgimi ve sana güvenmemi göstermeyi seçiyor."</span>
                     </div>
                 </div>
             </div>
@@ -1021,9 +1127,9 @@
                     <p class="model-preview">İlk araman 01:44'te ve o an gerçekten açtım.</p>
                     <div class="model-expand">
                         <p class="model-full-text">
-                            Telefon kayıtlarında net: Çağrı 01:44'te düşüyor ve aynı dakika içinde cevaplanıyor.
-                            Yani ilk çaldığında yanındaydım.  
-                            Sen hatırlamıyor olabilirsin ama bu, yanında olmadığım anlamına gelmiyor; sadece uykunun ağırlığı.
+                            Telefon kayıtlarında net: çağrı 01:44'te düşüyor ve aynı dakika içinde cevaplanıyor.  
+                            Yani fırtınada ilk aradığın anda yanındaydım.  
+                            Sen bugün “hatırlamıyorum” diyorsun; bu, yanında olmadığım anlamına değil, o anın ne kadar uykulu ve karışık olduğuna işaret ediyor.
                         </p>
                     </div>
                 </div>
@@ -1033,12 +1139,13 @@
                         <div class="model-icon">🌙</div>
                         <h3 class="model-name">Uykulu Konuşma</h3>
                     </div>
-                    <p class="model-preview">İkimiz de yarı uykuluyduk; hafıza bulanık, niyet netti.</p>
+                    <p class="model-preview">Hafıza bulanık, niyet netti.</p>
                     <div class="model-expand">
                         <p class="model-full-text">
-                            O gece sen fırtınada korkarken, ben derin uykudan yeni uyanmıştım.
-                            Konuşma kayıtta, seslerimiz orada; ama beynimiz tam ayık değildi.  
-                            Senin "hatırlamıyorum" demen beni suçlu hissettirmiyor, sadece keşke ikimiz de daha uyanık olsaydık dedirtiyor.
+                            O gece sen fırtınada korkarken, ben derin uykudan yeni uyanmıştım.  
+                            Seslerimiz kayda geçmiş, ama hafızamızda tam oturmamış olabilir.  
+                            Bu durum, sana olan sevgimi ya da önemini azaltmaz; sadece vücudumuzun ve uykunun sınırlarını gösterir.  
+                            Keşke o anı net hatırlayabilseydik; ama benim için önemli olan, seni aradığında gerçekten açmış olmam.
                         </p>
                     </div>
                 </div>
@@ -1048,13 +1155,13 @@
                         <div class="model-icon">📞</div>
                         <h3 class="model-name">İki Arama</h3>
                     </div>
-                    <p class="model-preview">İlk aramada yanındaydım, ikincisinde olamadım.</p>
+                    <p class="model-preview">İlkinde yanındaydım, ikincisinde olamadım.</p>
                     <div class="model-expand">
                         <p class="model-full-text">
                             01:44'teki aramada telefona cevap verdim.  
-                            05:44'teki ikinci aramada ise geri dalmışım ve açamadım.  
-                            İşte bu kısım için özellikle özür diliyorum.  
-                            Hayal kırıklığını anlıyorum ve "bir daha olmasın" diye kendi tarafımda önlem alacağıma söz veriyorum.
+                            05:44'teki aramada ise seni kaçırdım; geri dalmıştım.  
+                            İşte bu kısım için özellikle üzgünüm, çünkü senin gözünde "aynı gece iki denemede de tam yanında olamayan" biri gibi hissettirdiğini biliyorum.  
+                            Bu his için senden içtenlikle özür diliyorum.
                         </p>
                     </div>
                 </div>
@@ -1062,16 +1169,16 @@
                 <div class="model-card scroll-reveal" onclick="toggleModel(this)">
                     <div class="model-header">
                         <div class="model-icon">✦</div>
-                        <h3 class="model-name">Güven ve Değerin</h3>
+                        <h3 class="model-name">Güven ve Kırgınlık</h3>
                     </div>
-                    <p class="model-preview">Senin güvenin, benim için her şeyden önce geliyor.</p>
+                    <p class="model-preview">Senin kırgınlığın, benim için hafif bir şey değil.</p>
                     <div class="model-expand">
                         <p class="model-full-text">
-                            Sen "önemli değil, abimi aradım" dediğinde, aslında ne kadar kırıldığını anladım.  
-                            Benim için ise tam tersi: bu konu, bu gece ve sen çok önemlisin.  
-                            Mesajda yazdığım "gereğin yok, bir daha aramam" cümlesi kalbimin gerçek niyetini yansıtmıyor;
-                            o anın kırgınlığıydı, gerçeğim değil.  
-                            Gerçek olan şu: Güvenini yeniden hak etmek ve seninle barışmak istiyorum.
+                            Sen "önemli değil, abimi aradım" dediğinde kelimeler sakin görünse de  
+                            altında, sevdiğim kadının kırgınlığı vardı.  
+                            Ben, o cümlenin altından şunu duydum: "Keşke bana daha çok güven verebilseydin."  
+                            Sen "bir daha aramam" demedin; ama ben içimden "ya bir gün beni aramayı bırakırsa?" diye korktum.  
+                            Bu sayfa, o korkuyu savunmak için değil, senin güvenini yeniden kazanmak için yazıldı.
                         </p>
                     </div>
                 </div>
@@ -1088,7 +1195,7 @@
                     <div class="step-number">01</div>
                     <div class="step-content">
                         <h4 class="step-title">Farkındayım</h4>
-                        <p class="step-desc">Hayal kırıklığı yarattım. Güvenini incittim. Bunu açıkça kabul ediyorum.</p>
+                        <p class="step-desc">Hayal kırıklığı yaşadığını hissediyorum. Güveninin hafif bile olsa sarsıldığını görmek bana ağır geliyor.</p>
                         <span class="step-status">✓ ACKNOWLEDGED</span>
                     </div>
                 </div>
@@ -1096,7 +1203,7 @@
                     <div class="step-number">02</div>
                     <div class="step-content">
                         <h4 class="step-title">Bahane Yok</h4>
-                        <p class="step-desc">Sebep var, ama bahane yok. Sorumluluk bende. Üstünden atlamıyorum.</p>
+                        <p class="step-desc">Uykuydu, fırtınaydı, saat geç oldu... Sebep var ama bahane yok. Hissettiğin kırgınlığı yok saymıyorum.</p>
                         <span class="step-status">✓ ACCEPTED</span>
                     </div>
                 </div>
@@ -1104,7 +1211,7 @@
                     <div class="step-number">03</div>
                     <div class="step-content">
                         <h4 class="step-title">Gece Önceliği: MAX</h4>
-                        <p class="step-desc">Bundan sonra senin araman en yüksek önceliğim. Telefon ayarlarımı, uykumu, gece düzenimi buna göre ayarlayacağım.</p>
+                        <p class="step-desc">Bundan sonra senin araman benim için en yüksek öncelik. Uykumu, telefon ayarlarımı ve gecemi buna göre ayarlamaya hazırım.</p>
                         <span class="step-status">✓ PRIORITY: MAXIMUM</span>
                     </div>
                 </div>
@@ -1112,9 +1219,68 @@
                     <div class="step-number">04</div>
                     <div class="step-content">
                         <h4 class="step-title">Güven İnşası</h4>
-                        <p class="step-desc">Elimden gelen her şeyi yapacağım ki bir daha "önemli değil" demek zorunda kalmayasın. Sana güven verecek biri olmak istiyorum.</p>
+                        <p class="step-desc">Senin için, "kafam rahat, ona güvenebilirim" diyeceğin biri olmak istiyorum. Bir daha kırılmaman için kendi tarafımda ne gerekiyorsa yapmaya söz veriyorum.</p>
                         <span class="step-status">✓ COMMITTED</span>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESKİTİLMİŞ MEKTUP SAYFASI -->
+        <section id="letter" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">Old Letter</p>
+                <h2 class="section-title">Gece Mektubu</h2>
+            </div>
+            <div class="letter-wrapper scroll-reveal">
+                <div class="letter-paper">
+                    <div class="letter-inner">
+                        <h3 class="letter-title">Eylülüm’e Yazılmış Gece Mektubu</h3>
+                        <div class="letter-date">GECE KAYDI • 01:44 SONRASI</div>
+                        <div class="letter-text">
+                            <p>Sevgili Eylülüm,</p>
+                            <p>
+                                Fırtınanın sesi geçti, saatler geçti, mesajlar geçti…  
+                                Ama içimde kalan şey, o gece senin kendini tam güvende hissetmemiş olma ihtimali.
+                            </p>
+                            <p>
+                                Telefon kayıtlarına bakınca görüyorum: 01:44’te aramışsın ve o an açmışım.  
+                                Sen bugün “hatırlamıyorum” diyorsun ve bunu anlıyorum.  
+                                Uykunun, fırtınanın, saatin ağırlığı birbirine karışmış bir an bu.
+                            </p>
+                            <p>
+                                Sonra “önemli değil, abimi aradım” dediğinde, kelimelerinin içinden  
+                                kalbimin duyduğu şey şuydu: “Biraz kırgınım.”  
+                                İşte o his, beni bu satırları yazmaya getirdi.
+                            </p>
+                            <p>
+                                Sana şunu söylemek istiyorum:  
+                                O gece niyetim sendin.  
+                                Bugün de, yarın da niyetim yine sen olacaksın.
+                            </p>
+                            <p>
+                                Ben, sevdiğim kadının kalbinde “gözüm kapalı güvenebilirim” dediği yer olmak istiyorum.  
+                                Hata yaptığım, eksik kaldığım anlar olacak; ama asla umursamazlıktan değil.  
+                                Ne kadar kırıldığını hafifletmek isterdim, biliyorum ki tek cümleyle mümkün değil.  
+                                Yine de bu mektup, sana karşı içimde taşıdığım saygının ve sevgimin sessiz bir imzası olsun.
+                            </p>
+                            <p>
+                                Bir gün bu sayfaya tekrar baktığında,  
+                                “O geceyi hiç savunmaya çalışmadı, sadece içten içe anlamamı istedi”  
+                                diyebileceğin biri olmak istiyorum.
+                            </p>
+                            <p>
+                                Eğer izin verirsen,  
+                                fırtınalı bir gecenin hatırasını,  
+                                sakin bir güven duygusuna çevirmek için çabalayan adam olarak kalmak istiyorum hayatında.
+                            </p>
+                            <p class="letter-sign">
+                                Her koşulda senin tarafında,<br>
+                                Yusuf’un.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="letter-smudge"></div>
                 </div>
             </div>
         </section>
@@ -1138,11 +1304,11 @@
                         <div class="pulse-ring"></div>
                     </div>
                     <p class="sensory-message">
-                        Sadece o geceyi gerçek haliyle görmeni.<br><br>
-                        Sadece niyetimi anlamanı.<br><br>
-                        Sadece yeniden bana güvenmeni.<br><br>
+                        Sadece o geceyi kayıtların gösterdiği gibi, kalbimin hissettiği gibi görmeni.<br><br>
+                        Sadece kırgınlığını anladığımı bilmeni.<br><br>
+                        Sadece bana yeniden güvenmeyi denemeni.<br><br>
                         Ve sadece benimle barışmanı.<br><br>
-                        01:44'te de, şimdi de, hep senin tarafındayım.
+                        Fırtınada da, sakin havada da, ben senin tarafındayım.
                     </p>
                 </div>
             </div>
@@ -1157,10 +1323,10 @@
                 <div class="hidden-message">
                     <p>Eylülüm,</p>
                     <p>O geceki kayıtlar şunu söylüyor: İlk araman 01:44'te ve telefon çalar çalmaz açmışım.</p>
-                    <p>İkimiz de uykuluyduk, konuşmuşuz ama sen sonradan hatırlamıyorsun. Bu beni suçlamak için değil; sadece şunu bil diye: o anda gerçekten yanındaydım.</p>
-                    <p>Sonra sana "gereğin yok, bir daha aramam" yazdım. Bu cümleyi hak etmedin. Kırgın ve yanlış bir tepkiydi, içimdekini doğru anlatmıyordu.</p>
-                    <p>Sen "önemli değil, abimi aradım" dediğinde, güveninin ne kadar incindiğini anladım. Bu benim için önemli değil değildi; tam tersi, içime oturdu.</p>
-                    <p>Tek isteğim, bana bir şans daha vermen ve o geceyi kalbimde olduğu gibi görmen: seni asla yarı yolda bırakmak istemeyen biri olarak.</p>
+                    <p>Sen o aramayı ve konuşmayı hatırlamıyorsun, bunu anlıyorum. Bu, yanında olmadığım anlamına değil; ikimizin de ne kadar uykulu olduğuna işaret ediyor.</p>
+                    <p>Sonrasında "önemli değil, abimi aradım" dediğinde, kelimelerin içinden kırgınlığını hissettim. O an içimden "ya bir gün beni aramaktan vazgeçerse" diye bir korku geçti.</p>
+                    <p>Bu korku, senin söylediğin bir cümle değildi; benim kalbimin, seni kaybetmekten korkan tarafıydı. Biliyorum ki sen "bir daha aramam" demedin.</p>
+                    <p>Tek isteğim, bana bir şans daha vermen. O geceyi, gerçek kayıtlarla ve benim niyetimle birlikte görmen. Çünkü sen benim için önemlisin ve güvenini hak etmek istiyorum.</p>
                 </div>
             </div>
         </div>
@@ -1235,18 +1401,21 @@
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
             }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
             document.querySelectorAll('.scroll-reveal, .repair-step').forEach(el => observer.observe(el));
         }
 
         function initNavDots() {
             const dots = document.querySelectorAll('.nav-dot');
-            const sections = ['hero', 'codes', 'models', 'repair', 'sensory'];
+            const sections = ['hero', 'codes', 'models', 'repair', 'letter', 'sensory'];
+
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
                     const section = document.getElementById(sections[index]);
                     if (section) section.scrollIntoView({ behavior: 'smooth' });
                 });
             });
+
             const sectionObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1255,11 +1424,16 @@
                     }
                 });
             }, { threshold: 0.3 });
-            sections.forEach(id => { const section = document.getElementById(id); if (section) sectionObserver.observe(section); });
+
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) sectionObserver.observe(section);
+            });
         }
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && hiddenLayer.classList.contains('active')) closeHiddenLayer(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && hiddenLayer.classList.contains('active')) closeHiddenLayer();
+        });
     </script>
 </body>
 </html>
-
