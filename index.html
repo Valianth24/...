@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Night Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0f;
+            --deep-night: #0d0d14;
+            --midnight: #12121a;
+            --smoke: #1a1a24;
+            --silver-mist: #9ca3af;
+            --moonlight: #e5e7eb;
+            --gold-ember: #d4a574;
+            --warm-glow: #e8c19a;
+            --heartbeat: #c9555e;
+            --trust-blue: #6b8cae;
+            --star-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--void);
+            color: var(--moonlight);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .stars-1 {
+            background-image: 
+                radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.8) 50%, transparent 50%),
+                radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 30% 15%, rgba(255,255,255,0.9) 50%, transparent 50%),
+                radial-gradient(1px 1px at 40% 45%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1px 1px at 50% 25%, rgba(255,255,255,0.7) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 60% 55%, rgba(255,255,255,0.8) 50%, transparent 50%),
+                radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1px 1px at 80% 65%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 90% 20%, rgba(255,255,255,0.9) 50%, transparent 50%),
+                radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1px 1px at 25% 85%, rgba(255,255,255,0.7) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 35% 60%, rgba(255,255,255,0.8) 50%, transparent 50%),
+                radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 65% 40%, rgba(255,255,255,0.9) 50%, transparent 50%),
+                radial-gradient(1px 1px at 75% 80%, rgba(255,255,255,0.7) 50%, transparent 50%),
+                radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.5) 50%, transparent 50%);
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        .stars-2 {
+            background-image: 
+                radial-gradient(1px 1px at 5% 5%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.7) 50%, transparent 50%),
+                radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1px 1px at 35% 50%, rgba(255,255,255,0.8) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 45% 18%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1px 1px at 55% 62%, rgba(255,255,255,0.7) 50%, transparent 50%),
+                radial-gradient(1px 1px at 65% 28%, rgba(255,255,255,0.6) 50%, transparent 50%),
+                radial-gradient(1.5px 1.5px at 75% 72%, rgba(255,255,255,0.9) 50%, transparent 50%),
+                radial-gradient(1px 1px at 85% 12%, rgba(255,255,255,0.5) 50%, transparent 50%),
+                radial-gradient(1px 1px at 95% 58%, rgba(255,255,255,0.7) 50%, transparent 50%);
+            animation: twinkle 5s ease-in-out infinite;
+            animation-delay: -2s;
+        }
+
+        .stars-3 {
+            background-image: 
+                radial-gradient(2px 2px at 3% 20%, rgba(212,165,116,0.6) 50%, transparent 50%),
+                radial-gradient(2px 2px at 22% 65%, rgba(212,165,116,0.5) 50%, transparent 50%),
+                radial-gradient(2px 2px at 47% 35%, rgba(212,165,116,0.7) 50%, transparent 50%),
+                radial-gradient(2px 2px at 72% 80%, rgba(212,165,116,0.5) 50%, transparent 50%),
+                radial-gradient(2px 2px at 93% 45%, rgba(212,165,116,0.6) 50%, transparent 50%),
+                radial-gradient(2.5px 2.5px at 17% 88%, rgba(107,140,174,0.5) 50%, transparent 50%),
+                radial-gradient(2.5px 2.5px at 63% 12%, rgba(107,140,174,0.6) 50%, transparent 50%);
+            animation: twinkle 6s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+            opacity: 0;
+            animation: shoot 8s ease-in-out infinite;
+        }
+
+        .shooting-star:nth-child(4) { top: 20%; left: -100px; animation-delay: 0s; }
+        .shooting-star:nth-child(5) { top: 50%; left: -100px; animation-delay: 4s; }
+        .shooting-star:nth-child(6) { top: 70%; left: -100px; animation-delay: 7s; }
+
+        @keyframes shoot {
+            0% { transform: translateX(0) rotate(-15deg); opacity: 0; }
+            5% { opacity: 1; }
+            15% { transform: translateX(calc(100vw + 200px)) rotate(-15deg); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        #vault-lock {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            height: -webkit-fill-available;
+            background: var(--void);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        #vault-lock .stars-container { z-index: -1; }
+
+        #vault-lock.unlocking {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .vault-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .vault-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold-ember);
+            border-radius: 50%;
+            animation: vault-pulse 3s ease-in-out infinite;
+        }
+
+        .vault-icon::after {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            filter: grayscale(0.3);
+        }
+
+        @keyframes vault-pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .vault-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: var(--moonlight);
+            margin-bottom: 8px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .vault-subtitle {
+            font-size: 0.75rem;
+            color: var(--silver-mist);
+            margin-bottom: 45px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-align: center;
+        }
+
+        .key-input-container {
+            position: relative;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .key-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            border-radius: 0;
+            color: var(--moonlight);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 0.2em;
+            transition: all 0.4s ease;
+        }
+
+        .key-input:focus {
+            outline: none;
+            border-color: var(--gold-ember);
+            box-shadow: 0 0 30px rgba(212, 165, 116, 0.15);
+        }
+
+        .key-input::placeholder {
+            color: rgba(156, 163, 175, 0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .key-hint {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--gold-ember);
+            opacity: 0.7;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .wrong-key {
+            animation: shake 0.5s ease;
+            border-color: var(--heartbeat) !important;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        #main-experience {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s ease;
+            position: relative;
+        }
+
+        #main-experience.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--void) 0%, transparent 100%);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            color: var(--gold-ember);
+            font-weight: 400;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            padding: 12px 20px;
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--silver-mist);
+            opacity: 0.4;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-dot.active {
+            opacity: 1;
+            background: var(--gold-ember);
+            transform: scale(1.3);
+        }
+
+        .hero {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 25px 100px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-overline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold-ember);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--gold-ember);
+            font-style: italic;
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--silver-mist);
+            font-weight: 300;
+            margin: 0 auto 40px;
+            line-height: 1.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 2s;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold-ember), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; height: 40px; }
+            50% { opacity: 1; height: 55px; }
+        }
+
+        .section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-overline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            color: var(--gold-ember);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+
+        .terminal-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: rgba(13, 13, 20, 0.9);
+            border: 1px solid rgba(212, 165, 116, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 15px;
+            background: rgba(26, 26, 36, 0.8);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .terminal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: var(--heartbeat); opacity: 0.7; }
+        .terminal-dot.yellow { background: var(--gold-ember); opacity: 0.7; }
+        .terminal-dot.green { background: #6b8c6b; opacity: 0.7; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--silver-mist);
+            letter-spacing: 0.1em;
+        }
+
+        .terminal-body {
+            padding: 20px 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            line-height: 2;
+        }
+
+        .log-entry {
+            margin-bottom: 22px;
+            opacity: 0;
+            transform: translateX(-15px);
+            animation: logReveal 0.8s ease forwards;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.08);
+        }
+
+        .log-entry:last-child { border-bottom: none; margin-bottom: 0; }
+        .log-entry:nth-child(1) { animation-delay: 0.5s; }
+        .log-entry:nth-child(2) { animation-delay: 1s; }
+        .log-entry:nth-child(3) { animation-delay: 1.5s; }
+        .log-entry:nth-child(4) { animation-delay: 2s; }
+        .log-entry:nth-child(5) { animation-delay: 2.5s; }
+
+        @keyframes logReveal {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .log-time { color: var(--trust-blue); font-weight: 500; }
+        .log-event { color: var(--gold-ember); }
+        .log-status { color: var(--heartbeat); }
+        .log-status.ok { color: #6b8c6b; }
+        .log-impact { color: var(--silver-mist); opacity: 0.7; }
+
+        .log-note {
+            display: block;
+            margin-top: 10px;
+            padding-left: 15px;
+            color: var(--moonlight);
+            font-style: italic;
+            border-left: 2px solid rgba(212, 165, 116, 0.3);
+            font-size: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .models-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .model-card {
+            background: rgba(13, 13, 20, 0.8);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 25px 20px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .model-card:active {
+            transform: scale(0.98);
+            border-color: rgba(212, 165, 116, 0.3);
+        }
+
+        .model-card:active::before { opacity: 1; }
+
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .model-icon { font-size: 1.5rem; filter: grayscale(0.3); }
+
+        .model-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--moonlight);
+        }
+
+        .model-preview {
+            font-size: 0.85rem;
+            color: var(--silver-mist);
+            line-height: 1.7;
+        }
+
+        .model-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, padding 0.6s ease;
+        }
+
+        .model-card.active .model-expand {
+            max-height: 400px;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(212, 165, 116, 0.15);
+        }
+
+        .model-full-text {
+            font-size: 0.9rem;
+            color: var(--moonlight);
+            line-height: 2;
+            font-style: italic;
+        }
+
+        .repair-container { max-width: 100%; margin: 0 auto; }
+
+        .repair-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .repair-step.visible { animation: stepReveal 0.8s ease forwards; }
+
+        @keyframes stepReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold-ember);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold-ember);
+            flex-shrink: 0;
+        }
+
+        .step-content { flex: 1; }
+
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--moonlight);
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--silver-mist);
+            line-height: 1.7;
+        }
+
+        .step-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: #6b8c6b;
+            margin-top: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        .letter-wrapper {
+            max-width: 760px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .letter-paper {
+            position: relative;
+            padding: 40px 30px 35px;
+            background: linear-gradient(135deg, #f5e6c8 0%, #e8d4a8 25%, #f2e0b8 50%, #e5d0a0 75%, #f0ddb0 100%);
+            color: #3a2a18;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.9;
+            transform: rotate(-0.8deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 90, 43, 0.2), inset 0 0 80px rgba(139, 90, 43, 0.08);
+            clip-path: polygon(0% 2%, 3% 0%, 8% 1%, 15% 0%, 22% 2%, 30% 0%, 38% 1%, 45% 0%, 52% 2%, 60% 0%, 68% 1%, 75% 0%, 82% 2%, 90% 0%, 95% 1%, 100% 3%, 100% 12%, 99% 20%, 100% 30%, 99% 40%, 100% 50%, 99% 60%, 100% 70%, 99% 80%, 100% 88%, 100% 97%, 95% 100%, 88% 99%, 80% 100%, 72% 99%, 65% 100%, 58% 99%, 50% 100%, 42% 99%, 35% 100%, 28% 99%, 20% 100%, 12% 99%, 5% 100%, 0% 98%, 0% 90%, 1% 82%, 0% 74%, 1% 66%, 0% 58%, 1% 50%, 0% 42%, 1% 34%, 0% 26%, 1% 18%, 0% 10%);
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(139, 90, 43, 0.03) 28px, rgba(139, 90, 43, 0.03) 29px), radial-gradient(ellipse at 20% 0%, rgba(139, 90, 43, 0.15), transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(139, 90, 43, 0.12), transparent 50%), radial-gradient(circle at 10% 90%, rgba(100, 60, 20, 0.08), transparent 30%), radial-gradient(circle at 90% 10%, rgba(100, 60, 20, 0.06), transparent 25%);
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        .letter-fold {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent 0%, rgba(139, 90, 43, 0.15) 20%, rgba(139, 90, 43, 0.2) 50%, rgba(139, 90, 43, 0.15) 80%, transparent 100%);
+            box-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+
+        .letter-stain {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(139, 90, 43, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .letter-stain-1 {
+            width: 80px;
+            height: 60px;
+            top: 15%;
+            right: 10%;
+            transform: rotate(25deg);
+        }
+
+        .letter-stain-2 {
+            width: 50px;
+            height: 40px;
+            bottom: 20%;
+            left: 8%;
+            transform: rotate(-15deg);
+        }
+
+        .letter-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+        }
+
+        .letter-corner-tl {
+            top: -2px;
+            left: -2px;
+            background: linear-gradient(135deg, var(--void) 0%, var(--void) 40%, transparent 41%);
+        }
+
+        .letter-corner-br {
+            bottom: -2px;
+            right: -2px;
+            background: linear-gradient(-45deg, var(--void) 0%, var(--void) 30%, transparent 31%);
+        }
+
+        .letter-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8b5a2b;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .letter-text {
+            font-size: 1rem;
+            line-height: 2;
+        }
+
+        .letter-text p {
+            margin-bottom: 16px;
+            text-indent: 1.5em;
+        }
+
+        .letter-text p:first-of-type {
+            text-indent: 0;
+        }
+
+        .letter-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .letter-sign {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 1.05rem;
+            text-align: right;
+            color: #5a3a1a;
+        }
+
+        .letter-paper:hover {
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(139, 90, 43, 0.25);
+            transition: all 0.5s ease;
+        }
+
+        .sensory-container {
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sensory-question {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--moonlight);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .sensory-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 30px;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            background: transparent;
+            color: var(--gold-ember);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .sensory-trigger:active {
+            background: rgba(212, 165, 116, 0.1);
+            border-color: var(--gold-ember);
+            transform: scale(0.98);
+        }
+
+        .sensory-experience {
+            margin-top: 50px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .sensory-experience.active { opacity: 1; }
+
+        .pulse-effect {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 35px;
+            position: relative;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--gold-ember);
+            border-radius: 50%;
+            animation: pulseExpand 2s ease-out infinite;
+        }
+
+        .pulse-ring:nth-child(1) { width: 40px; height: 40px; animation-delay: 0s; }
+        .pulse-ring:nth-child(2) { width: 80px; height: 80px; animation-delay: 0.4s; }
+        .pulse-ring:nth-child(3) { width: 120px; height: 120px; animation-delay: 0.8s; }
+        .pulse-ring:nth-child(4) { width: 150px; height: 150px; animation-delay: 1.2s; }
+
+        @keyframes pulseExpand {
+            0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .sensory-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--moonlight);
+            line-height: 2;
+            opacity: 0;
+            animation: textFade 1.5s ease forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes textFade { to { opacity: 1; } }
+
+        .hidden-trigger {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0.25;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hidden-trigger:active { opacity: 0.6; }
+        .hidden-trigger::before { content: '✦'; font-size: 1rem; color: var(--gold-ember); }
+
+        .hidden-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.98);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        .hidden-layer.active { opacity: 1; pointer-events: all; }
+
+        .hidden-terminal {
+            max-width: 100%;
+            padding: 35px 25px;
+            background: rgba(13, 13, 20, 0.95);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .hidden-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--trust-blue);
+            margin-bottom: 25px;
+            letter-spacing: 0.1em;
+        }
+
+        .hidden-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: var(--moonlight);
+        }
+
+        .hidden-message p { margin-bottom: 18px; }
+        .hidden-message p:last-child { margin-bottom: 0; }
+
+        .hidden-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--silver-mist);
+        }
+
+        .footer {
+            padding: 60px 20px 120px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .footer-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-ember);
+            margin-bottom: 20px;
+        }
+
+        .footer-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--silver-mist);
+            letter-spacing: 0.15em;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (min-width: 769px) {
+            .nav-container { padding: 25px 40px; justify-content: flex-start; }
+            .mobile-nav { display: none; }
+            .hero { padding: 100px 40px; }
+            .hero-title { font-size: 4rem; }
+            .hero-title span { font-size: 3rem; }
+            .section { padding: 120px 40px; }
+            .section-title { font-size: 2.5rem; }
+            .terminal-body { padding: 30px; font-size: 0.85rem; }
+            .terminal-container { max-width: 800px; }
+            .models-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; max-width: 900px; }
+            .model-card { padding: 35px 30px; }
+            .repair-container { max-width: 700px; }
+            .repair-step { gap: 30px; padding: 30px 0; }
+            .step-number { width: 50px; height: 50px; font-size: 0.85rem; }
+            .hidden-trigger { bottom: 30px; left: 30px; }
+            .footer { padding: 80px 40px 50px; }
+            .letter-paper { padding: 50px 40px 45px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="vault-lock">
+        <div class="stars-container">
+            <div class="stars stars-1"></div>
+            <div class="stars stars-2"></div>
+            <div class="stars stars-3"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+        </div>
+        <div class="vault-icon"></div>
+        <h1 class="vault-title">Gece Kaydı Kilitli</h1>
+        <p class="vault-subtitle">Yetkisiz erişim engellendi</p>
+        <div class="key-input-container">
+            <input type="text" class="key-input" id="key-input" placeholder="Anahtar kelimeyi gir" autocomplete="off" spellcheck="false">
+            <span class="key-hint">Benim olan Meleğin adı</span>
+        </div>
+    </div>
+
+    <div id="main-experience">
+        <div class="stars-container">
+            <div class="stars stars-1"></div>
+            <div class="stars stars-2"></div>
+            <div class="stars stars-3"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+        </div>
+        <div class="grain-overlay"></div>
+
+        <nav class="nav-container">
+            <div class="nav-logo">NIGHT VAULT</div>
+        </nav>
+
+        <div class="mobile-nav">
+            <div class="nav-dot active" data-section="hero"></div>
+            <div class="nav-dot" data-section="codes"></div>
+            <div class="nav-dot" data-section="models"></div>
+            <div class="nav-dot" data-section="repair"></div>
+            <div class="nav-dot" data-section="letter"></div>
+            <div class="nav-dot" data-section="sensory"></div>
+        </div>
+
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <p class="hero-overline">night_vault.v1.0</p>
+                <h1 class="hero-title">
+                    Gece
+                    <span>Bana Güven</span>
+                </h1>
+                <p class="hero-desc">
+                    Bu sayfa sana bir şeyi ispat etmek için değil,<br>
+                    sana kalbimi açmak için yazıldı.
+                </p>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <section id="codes" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">System Logs</p>
+                <h2 class="section-title">Gece Ne Oldu</h2>
+            </div>
+            <div class="terminal-container scroll-reveal">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">night_record.log</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="log-entry">
+                        <span class="log-time">[01:43]</span> <span class="log-event">STORM_DETECTED</span><br>
+                        <span class="log-impact">event:</span> fırtına başladı<br>
+                        <span class="log-note">"Fırtına çıktı. Korktun. Beni aradın."</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[01:44]</span> <span class="log-event">CALL_INCOMING</span><br>
+                        <span class="log-impact">from:</span> Eylülüm<br>
+                        <span class="log-impact">status:</span> <span class="log-status ok">answered</span><br>
+                        <span class="log-note">"Açtım. Ama uykudan yeni uyanmıştım, konuşamadım. Neredeyse hatırlamıyorum bile."</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[05:00]</span> <span class="log-event">WAKE_UP</span><br>
+                        <span class="log-impact">action:</span> checked_phone<br>
+                        <span class="log-note">"Uyandım. mesajları gördüm. İçimde bir sıkıntı oluştu. Sonra ise aramayı gördüm rahatladım sonrasında mesaj yok beraber uyuduk dedim."</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[05:44]</span> <span class="log-event">CALL_INCOMING</span><br>
+                        <span class="log-impact">from:</span> Eylülüm<br>
+                        <span class="log-impact">status:</span> <span class="log-status">missed</span><br>
+                        <span class="log-note">"Tekrar aramışsın. Ben geri uyumuştum. Bu kısım için özür dilerim."</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[SONRA]</span> <span class="log-event">AFTERMATH</span><br>
+                        <span class="log-impact">feeling:</span> kırgınlık hissettim<br>
+                        <span class="log-note">"Abini aramışsın. 'Önemli değil' dedin. Ama cümlenin altındaki kırgınlığı ve bir çok duyguyu hissediyorum."</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="models" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">Analysis</p>
+                <h2 class="section-title">Anla</h2>
+            </div>
+            <div class="models-grid">
+                <div class="model-card scroll-reveal" onclick="toggleModel(this)">
+                    <div class="model-header">
+                        <div class="model-icon">⚡</div>
+                        <h3 class="model-name">Fırtına Anı</h3>
+                    </div>
+                    <p class="model-preview">Sen korkarken beni aradın. Bu benim için çok şey ifade ediyor.</p>
+                    <div class="model-expand">
+                        <p class="model-full-text">Fırtınada ilk aklına ben geldim. Bu, bana ne kadar güvendiğini gösteriyor. Ve ben o güveni korumak istiyorum. Ben senin yanında olduğumu düşünerek uyudum.</p>
+                    </div>
+                </div>
+
+                <div class="model-card scroll-reveal" onclick="toggleModel(this)">
+                    <div class="model-header">
+                        <div class="model-icon">📞</div>
+                        <h3 class="model-name">İki Arama</h3>
+                    </div>
+                    <p class="model-preview">İlkinde açtım ama konuşamadım. İkincisinde kaçırdım.</p>
+                    <div class="model-expand">
+                        <p class="model-full-text">01:44'te açtım ama yarı uykuluydum. 05:44'te ise geri uyumuştum ve kaçırdım. Hayal kırıklığı yaşadığını biliyorum. Bu benim hatam ve bunun için gerçekten üzgünüm.</p>
+                    </div>
+                </div>
+
+                <div class="model-card scroll-reveal" onclick="toggleModel(this)">
+                    <div class="model-header">
+                        <div class="model-icon">🔑</div>
+                        <h3 class="model-name">Güven</h3>
+                    </div>
+                    <p class="model-preview">Bana güvenip beni aradın o kadar mutluyumki.</p>
+                    <div class="model-expand">
+                        <p class="model-full-text">Seni çok seviyorum. Bana daima güvenmeni istiyorum gerçekten hep daha iyisi daha iyisi diye ilerliyorum. Seni çok seviyorum ben Eylülüm affet kendimi senin yanında hayal edip saldım ben.</p>
+                    </div>
+                </div>
+
+                <div class="model-card scroll-reveal" onclick="toggleModel(this)">
+                    <div class="model-header">
+                        <div class="model-icon">✦</div>
+                        <h3 class="model-name">Değerin</h3>
+                    </div>
+                    <p class="model-preview">Sen benim için önemlisin. Bunu her gün hissetmeni istiyorum.</p>
+                    <div class="model-expand">
+                        <p class="model-full-text">Sen benim meleğimsin. gece yanında olamadım diye bu değişmez. Seni seviyorum ve seninle barışmak istiyorum. Lütfen gel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="repair" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">Protocol</p>
+                <h2 class="section-title">Söz Veriyorum</h2>
+            </div>
+            <div class="repair-container">
+                <div class="repair-step scroll-reveal">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4 class="step-title">Sorumluluğu Alıyorum</h4>
+                        <p class="step-desc">Bahane yok. Sebep var ama bahane yok. gece yanında olamadım ve bunun sorumluluğu benim.</p>
+                        <span class="step-status">✓ ACKNOWLEDGED</span>
+                    </div>
+                </div>
+                <div class="repair-step scroll-reveal">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4 class="step-title">Kırgınlığını Anlıyorum</h4>
+                        <p class="step-desc">Sen beni aradın, ben orada olamadım. Hayal kırıklığı yaşadın. Bu hissi küçümsemiyorum.</p>
+                        <span class="step-status">✓ UNDERSTOOD</span>
+                    </div>
+                </div>
+                <div class="repair-step scroll-reveal">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4 class="step-title">Değişeceğim</h4>
+                        <p class="step-desc">Bundan sonra kednimi asla rahatta bırakmayacağım salmayacağım.</p>
+                        <span class="step-status">✓ COMMITTED</span>
+                    </div>
+                </div>
+                <div class="repair-step scroll-reveal">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h4 class="step-title">Benim de canım yanıyor.</h4>
+                        <p class="step-desc">İnan her salise ben çabalıyorum nefes almıyorum. Özür dilerim uyuyup o telefonu açmadığım için.</p>
+                        <span class="step-status">✓ IN PROGRESS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="letter" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">Old Letter</p>
+                <h2 class="section-title">Sana Yazdığım Mektup</h2>
+            </div>
+            <div class="letter-wrapper scroll-reveal">
+                <div class="letter-paper">
+                    <div class="letter-fold"></div>
+                    <div class="letter-stain letter-stain-1"></div>
+                    <div class="letter-stain letter-stain-2"></div>
+                    <div class="letter-corner letter-corner-tl"></div>
+                    <div class="letter-corner letter-corner-br"></div>
+                    <div class="letter-inner">
+                        <div class="letter-date">Gecenin sabahı yazıldı</div>
+                        <div class="letter-text">
+                            <p>Eylülüm,</p>
+                            <p>Bu mektubu yazarken ellerim biraz titriyor. Çünkü sana karşı hissettiğim şeyleri kelimelerle anlatmak her zaman zor oldu benim için.</p>
+                            <p>Gece fırtına çıktığında beni aradın. Ben açtım ama konuşamadım. Uykudan yeni uyanmıştım, yarı bilinçliydim. Sonra tekrar aradığında geri uyumuştum ve kaçırdım. Bunu telafi edemem biliyorum.</p>
+                            <p>Ama sana şunu söylemek istiyorum: Sen benim için önemlisin. Fırtınada ilk aklına ben geldim ve bu benim için her şey demek. O güveni korumak istiyorum.</p>
+                            <p>Kırgınsın, biliyorum. Hayal kırıklığı yaşadın, anlıyorum. Ama lütfen benim de senin için nasıl çabaladığımı gör bundan sonra daha dikkat edeceğim sadece secdiğim kadınla huzurluca uyuduğumu hissettim kendime gelmek istedim bu gece Herşeyim yanıdayken.</p>
+                            <p>Seninle barışmak istiyorum. bana güvenmeni istiyorum. Her saniye benimle gülmeni isityorum.</p>
+                        </div>
+                        <div class="letter-sign">
+                            Her zaman senin,<br>
+                            Yusuf
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sensory" class="section">
+            <div class="section-header scroll-reveal">
+                <p class="section-overline">Final</p>
+                <h2 class="section-title">Sana</h2>
+            </div>
+            <div class="sensory-container scroll-reveal">
+                <h3 class="sensory-question">"Senden ne istiyorum?"</h3>
+                <button class="sensory-trigger" onclick="triggerSensory()">
+                    <span>Göster</span>
+                    <span>→</span>
+                </button>
+                <div class="sensory-experience" id="sensory-experience">
+                    <div class="pulse-effect">
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring"></div>
+                    </div>
+                    <p class="sensory-message">
+                        Benimle barışmanı.<br><br>
+                        Bana güvenmeni.<br><br>
+                        Beni affetmeni.<br><br>
+                        Ve yanımda olmanı.<br><br>
+                        Bu kadar. Sadece bu kadar.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="hidden-trigger" id="hidden-trigger"></div>
+
+        <div class="hidden-layer" id="hidden-layer">
+            <div class="hidden-close" onclick="closeHiddenLayer()">×</div>
+            <div class="hidden-terminal">
+                <div class="hidden-header">core_message:</div>
+                <div class="hidden-message">
+                    <p>Eylülüm,</p>
+                    <p>Sen benim meleğimsin.</p>
+                    <p>Gece yanında olamadım. Bu gerçek ve bunun için üzgünüm.</p>
+                    <p>Ama seni sevdiğim de gerçek. Ve bu hiç değişmedi.</p>
+                    <p>Bana güven. Benimle barış. Yanımda ol.</p>
+                    <p>Çünkü ben her zaman senin yanındayım.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p class="footer-message">"Bana güven. Seninle her şeyin üstesinden geliriz."</p>
+            <p class="footer-time">NIGHT VAULT • Eylülüm İçin</p>
+        </footer>
+    </div>
+
+    <script>
+        const SECRET_KEY = 'eylülüm';
+        const ALTERNATIVE_KEYS = ['eylulum', 'Eylülüm', 'EYLÜLÜM', 'eylul', 'eylül', 'Eylül'];
+
+        const keyInput = document.getElementById('key-input');
+        const vaultLock = document.getElementById('vault-lock');
+        const mainExperience = document.getElementById('main-experience');
+
+        keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkKey(); });
+        keyInput.addEventListener('blur', () => { if (keyInput.value.length > 0) setTimeout(checkKey, 100); });
+
+        function checkKey() {
+            const enteredKey = keyInput.value.toLowerCase().trim();
+            const validKeys = [SECRET_KEY.toLowerCase(), ...ALTERNATIVE_KEYS.map(k => k.toLowerCase())];
+            if (validKeys.includes(enteredKey)) {
+                unlockVault();
+            } else if (keyInput.value.length > 0) {
+                keyInput.classList.add('wrong-key');
+                setTimeout(() => keyInput.classList.remove('wrong-key'), 500);
+                keyInput.value = '';
+            }
+        }
+
+        function unlockVault() {
+            vaultLock.classList.add('unlocking');
+            setTimeout(() => {
+                vaultLock.style.display = 'none';
+                mainExperience.classList.add('active');
+                initScrollAnimations();
+                initNavDots();
+            }, 1500);
+        }
+
+        function toggleModel(card) {
+            const wasActive = card.classList.contains('active');
+            document.querySelectorAll('.model-card').forEach(c => c.classList.remove('active'));
+            if (!wasActive) card.classList.add('active');
+        }
+
+        function triggerSensory() {
+            document.getElementById('sensory-experience').classList.add('active');
+        }
+
+        let holdTimer;
+        const hiddenTrigger = document.getElementById('hidden-trigger');
+        const hiddenLayer = document.getElementById('hidden-layer');
+
+        hiddenTrigger.addEventListener('mousedown', startHold);
+        hiddenTrigger.addEventListener('mouseup', endHold);
+        hiddenTrigger.addEventListener('mouseleave', endHold);
+        hiddenTrigger.addEventListener('touchstart', e => { e.preventDefault(); startHold(); });
+        hiddenTrigger.addEventListener('touchend', endHold);
+        hiddenTrigger.addEventListener('touchcancel', endHold);
+
+        function startHold() { holdTimer = setTimeout(() => hiddenLayer.classList.add('active'), 1500); }
+        function endHold() { clearTimeout(holdTimer); }
+        function closeHiddenLayer() { hiddenLayer.classList.remove('active'); }
+
+        hiddenLayer.addEventListener('click', e => { if (e.target === hiddenLayer) closeHiddenLayer(); });
+
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+            document.querySelectorAll('.scroll-reveal, .repair-step').forEach(el => observer.observe(el));
+        }
+
+        function initNavDots() {
+            const dots = document.querySelectorAll('.nav-dot');
+            const sections = ['hero', 'codes', 'models', 'repair', 'letter', 'sensory'];
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const section = document.getElementById(sections[index]);
+                    if (section) section.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            const sectionObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = sections.indexOf(entry.target.id);
+                        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) sectionObserver.observe(section);
+            });
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && hiddenLayer.classList.contains('active')) closeHiddenLayer();
+        });
+    </script>
+</body>
+</html>
